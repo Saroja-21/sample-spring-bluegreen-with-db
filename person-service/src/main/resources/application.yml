@@ -11,11 +11,22 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
 
 management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info     
   endpoint:
     health:
       show-details: ALWAYS
+      probes:
+        enabled: true             
+  health:
+    livenessstate:
+      enabled: true               
+    readinessstate:
+      enabled: true               s
+  endpoint:
+    health:
       group:
         readiness:
-          include: db
-      probes:
-        enabled: true
+          include: db             
