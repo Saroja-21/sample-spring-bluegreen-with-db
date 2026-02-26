@@ -3,8 +3,22 @@ spring:
     name: caller-service
 
 management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+
   endpoint:
     health:
       show-details: ALWAYS
       probes:
         enabled: true
+      group:
+        readiness:
+          include: db
+
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
