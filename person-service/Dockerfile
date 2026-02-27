@@ -1,8 +1,19 @@
+# -------- Stage 1: Artifact Stage --------
+FROM eclipse-temurin:21-jre-alpine AS artifact
+
+WORKDIR /app
+
+# Copy pre-built jar from CI
+COPY target/*.jar app.jar
+
+
+# -------- Stage 2: Runtime Stage --------
 FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-COPY target/*.jar app.jar
+# Copy jar from artifact stage
+COPY --from=artifact /app/app.jar app.jar
 
 EXPOSE 80
 
