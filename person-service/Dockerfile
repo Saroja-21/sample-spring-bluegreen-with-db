@@ -1,22 +1,18 @@
-# -------- Stage 1: Artifact Stage --------
-FROM eclipse-temurin:21-jre-alpine AS artifact
-
-WORKDIR /app
-
-# Copy pre-built jar from CI
+# ---------- Stage 1: build ----------
+FROM alpine:3.20 AS build
+WORKDIR /build
+ 
+# Copy the jar produced by Harness Maven step
 COPY target/*.jar app.jar
-
-
-# -------- Stage 2: Runtime Stage --------
+ 
+ 
+# ---------- Stage 2: runtime ----------
 FROM eclipse-temurin:21-jre-alpine
-
 WORKDIR /app
-
-# Copy jar from artifact stage
-COPY --from=artifact /app/app.jar app.jar
-
+ 
+COPY --from=build /build/app.jar app.jar
+ 
 EXPOSE 80
-
 ENV SERVER_PORT=80
-
+ 
 ENTRYPOINT ["java", "-jar", "app.jar"]
