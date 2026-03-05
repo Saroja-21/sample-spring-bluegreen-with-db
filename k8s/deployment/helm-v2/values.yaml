@@ -1,0 +1,10 @@
+replicaCount: 2
+
+image:
+  repository: saroja21/person-service
+  tag: "v2"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080

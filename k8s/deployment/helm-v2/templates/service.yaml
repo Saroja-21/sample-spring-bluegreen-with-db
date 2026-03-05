@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: person-service-v2-svc
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: person-service
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8080
+      protocol: TCP

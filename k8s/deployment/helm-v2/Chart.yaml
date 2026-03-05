@@ -1,0 +1,6 @@
+apiVersion: v2
+name: person-service-v2
+description: Person Service Helm Chart v2
+type: application
+version: 0.2.0
+appVersion: "2.0"
