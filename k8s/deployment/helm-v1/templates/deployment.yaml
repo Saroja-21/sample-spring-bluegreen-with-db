@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
+
 spec:
   replicas: {{ .Values.replicaCount }}
 
@@ -19,17 +20,20 @@ spec:
     metadata:
       labels:
         app: person-service
+
     spec:
       containers:
         - name: person-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
           ports:
             - containerPort: 8080
-   resources:
-      requests:
-        cpu: {{ .Values.resources.requests.cpu }}
-        memory: {{ .Values.resources.requests.memory }}
-      limits:
-        cpu: {{ .Values.resources.limits.cpu }}
-        memory: {{ .Values.resources.limits.memory }}
+
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
