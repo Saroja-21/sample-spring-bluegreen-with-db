@@ -17,3 +17,8 @@ resources:
     cpu: 500m
     memory: 512Mi
 
+database:
+  name: persondb
+  user: postgres
+  password: postgres123
+
