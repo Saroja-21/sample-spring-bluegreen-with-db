@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: person-service-config
+data:
+  DATABASE_NAME: persondb
+  DATABASE_USER: postgres
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: person-service
+  labels:
+    app: person-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: person-service
+  template:
+    metadata:
+      labels:
+        app: person-service
+    spec:
+      containers:
+        - name: person-service
+          image: saroja21/person-service:33
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: person-service-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: person-service
+spec:
+  selector:
+    app: person-service
+  ports:
+    - port: 8080
+      targetPort: 8080
