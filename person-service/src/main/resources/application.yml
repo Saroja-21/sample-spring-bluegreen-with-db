@@ -1,10 +1,6 @@
 spring:
   application:
     name: person-service
-  datasource:
-    url: jdbc:postgresql://postgres:5432/${DATABASE_NAME}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
 
 logging:
   pattern:
@@ -14,16 +10,13 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include: health,info
 
   endpoint:
     health:
       show-details: ALWAYS
       probes:
         enabled: true
-      group:
-        readiness:
-          include: db
 
   health:
     livenessstate:
