@@ -43,21 +43,7 @@ spec:
             - configMapRef:
                 name: person-service-config
 
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 40
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 6
-
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
+          
 
 ---
 apiVersion: v1
