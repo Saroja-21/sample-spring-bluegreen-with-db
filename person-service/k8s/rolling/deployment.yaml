@@ -12,6 +12,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: person-service
+  namespace: dev
   labels:
     app: person-service
 spec:
@@ -29,18 +30,45 @@ spec:
           image: saroja21/person-service:33
           ports:
             - containerPort: 8080
+
+          # REQUIRED for your dev-quota
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
           envFrom:
             - configMapRef:
                 name: person-service-config
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: person-service
+  namespace: dev
 spec:
   selector:
     app: person-service
   ports:
     - port: 8080
       targetPort: 8080
+      protocol: TCP
+  type: ClusterIP
