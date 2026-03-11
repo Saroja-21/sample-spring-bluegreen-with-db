@@ -15,29 +15,18 @@
 
 <artifactId>person-service</artifactId>
 
-<properties>
-    <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
-    <testcontainers.version>1.21.4</testcontainers.version>
-</properties>
-
 <dependencies>
 
-    <!-- Actuator -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-
-    <!-- Spring Data JPA -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <!-- Web -->
+    <!-- Spring Boot Web -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Actuator (needed for smoke test health check) -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
 
     <!-- Lombok -->
@@ -47,60 +36,25 @@
         <version>1.18.42</version>
     </dependency>
 
-    
-    <!-- Spring Boot Test -->
+    <!-- Test -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
         <scope>test</scope>
     </dependency>
 
-    
-
-    <!-- Testcontainers JUnit -->
-    <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>junit-jupiter</artifactId>
-        <scope>test</scope>
-    </dependency>
-
-    <!-- Instancio -->
-    <dependency>
-        <groupId>org.instancio</groupId>
-        <artifactId>instancio-junit</artifactId>
-        <version>5.5.1</version>
-        <scope>test</scope>
-    </dependency>
-
-    <!-- Spring Boot Testcontainers -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-testcontainers</artifactId>
-        <scope>test</scope>
-    </dependency>
-
 </dependencies>
-
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers-bom</artifactId>
-            <version>${testcontainers.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
 
 <build>
     <plugins>
 
+        <!-- Spring Boot Plugin -->
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
         </plugin>
 
+        <!-- Jib for building Docker image in pipeline -->
         <plugin>
             <groupId>com.google.cloud.tools</groupId>
             <artifactId>jib-maven-plugin</artifactId>
@@ -109,6 +63,5 @@
 
     </plugins>
 </build>
-
 
 </project>
