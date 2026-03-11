@@ -34,23 +34,25 @@ spec:
               cpu: "500m"
               memory: "512Mi"
 
-          # Health checks for Kubernetes
           readinessProbe:
-            httpGet:
-              path: /hello
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 5
-
-          livenessProbe:
             httpGet:
               path: /hello
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -62,8 +64,8 @@ spec:
     app: person-service
 
   ports:
-    - protocol: TCP
-      port: 8080
+    - port: 8080
       targetPort: 8080
+      protocol: TCP
 
   type: ClusterIP
