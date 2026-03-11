@@ -15,6 +15,10 @@
 
 <artifactId>person-service</artifactId>
 
+<properties>
+    <java.version>21</java.version>
+</properties>
+
 <dependencies>
 
     <!-- Spring Boot Web -->
@@ -23,7 +27,7 @@
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- Actuator (needed for smoke test health check) -->
+    <!-- Actuator for /actuator/health -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-actuator</artifactId>
@@ -36,7 +40,7 @@
         <version>1.18.42</version>
     </dependency>
 
-    <!-- Test -->
+    <!-- Tests -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
@@ -48,13 +52,13 @@
 <build>
     <plugins>
 
-        <!-- Spring Boot Plugin -->
+        <!-- Spring Boot plugin -->
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
         </plugin>
 
-        <!-- Jib for building Docker image in pipeline -->
+        <!-- Jib plugin (used in your CI pipeline) -->
         <plugin>
             <groupId>com.google.cloud.tools</groupId>
             <artifactId>jib-maven-plugin</artifactId>
