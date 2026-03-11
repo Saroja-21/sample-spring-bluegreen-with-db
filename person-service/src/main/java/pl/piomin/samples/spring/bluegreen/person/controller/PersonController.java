@@ -1,38 +1,14 @@
 package pl.piomin.samples.spring.bluegreen.person.controller;
 
-import org.springframework.web.bind.annotation.*;
-import pl.piomin.samples.spring.bluegreen.person.model.Person;
-import pl.piomin.samples.spring.bluegreen.person.repository.PersonRepository;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/persons")
 public class PersonController {
 
-    private PersonRepository repository;
-
-    public PersonController(PersonRepository repository) {
-        this.repository = repository;
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello from Person Service";
     }
 
-    @PostMapping
-    public Person add(@RequestBody Person person) {
-        return repository.save(person);
-    }
-
-    @PutMapping
-    public Person update(@RequestBody Person person) {
-        return repository.save(person);
-    }
-
-    @GetMapping("/{id}")
-    public Person findById(@PathVariable("id") Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    @GetMapping
-    public Iterable<Person> findAll() {
-        return repository.findAll();
-    }
 }
