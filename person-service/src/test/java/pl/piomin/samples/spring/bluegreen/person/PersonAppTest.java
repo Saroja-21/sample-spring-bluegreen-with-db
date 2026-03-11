@@ -1,12 +1,13 @@
 package pl.piomin.samples.spring.bluegreen.person;
 
-import org.springframework.boot.SpringApplication;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-public class PersonAppTest {
+@SpringBootTest
+class PersonAppTest {
 
-    public static void main(String[] args) {
-        SpringApplication.from(PersonApp::main)
-                .with(PostgresContainerDevMode.class)
-                .run(args);
+    @Test
+    void contextLoads() {
     }
+
 }
