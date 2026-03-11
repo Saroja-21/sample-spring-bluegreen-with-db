@@ -4,8 +4,14 @@ metadata:
   name: person-service-config
   namespace: dev
 data:
-  DATABASE_NAME: persondb
-  DATABASE_USER: postgres
+  DATABASE_NAME: bluegreen
+  DATABASE_USER: bluegreen
+  DATABASE_HOST: postgres
+  DATABASE_PASSWORD: bluegreen
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bluegreen
+  SPRING_DATASOURCE_USERNAME: bluegreen
+  SPRING_DATASOURCE_PASSWORD: bluegreen
+  SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
 
 ---
 
