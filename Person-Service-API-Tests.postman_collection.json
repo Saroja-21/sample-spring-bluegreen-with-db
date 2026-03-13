@@ -38,20 +38,19 @@
       "response": []
     },
     {
-      "name": "Get Persons",
+      "name": "Hello Endpoint",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('Get persons returns 200', function () {",
+              "pm.test('Hello endpoint returns 200', function () {",
               "    pm.response.to.have.status(200);",
               "});",
               "",
-              "pm.test('Response is an array', function () {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData).to.be.an('array');",
+              "pm.test('Response contains hello message', function () {",
+              "    pm.expect(pm.response.text()).to.include('Hello');",
               "});"
             ]
           }
@@ -61,9 +60,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/persons",
+          "raw": "{{baseUrl}}/hello",
           "host": ["{{baseUrl}}"],
-          "path": ["api", "persons"]
+          "path": ["hello"]
         }
       },
       "response": []
