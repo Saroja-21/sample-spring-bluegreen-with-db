@@ -26,7 +26,8 @@ metadata:
 spec:
   replicas: 2
   
-strategy:
+
+  strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
